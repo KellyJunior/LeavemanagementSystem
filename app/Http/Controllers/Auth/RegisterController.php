@@ -52,12 +52,13 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'lastName'=>['required','string','max:255'],
-            'username'=>['required','string','max:255'],
+            'username'=>['required','string','max:255' ,'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address'=>['required'],
-            'contact'=>['required','numeric'],
+            'contact'=>['required','numeric','min:8','unique:users'],
             'dob'=> ['required'],
+            'status'=>['required','string','max:7'],
         ]);
     }
 
@@ -69,6 +70,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $statusInput=$data['status'];
+        if($statusInput== "Admin"){
+            $status=1;
+        }else if($statusInput== "Employee"){
+            $status=2;
+        }else if($statusInput== "HOD"){
+            $status=3;
+        }
         return User::create([
             'name' => $data['name'],
             'lastName'=> $data['lastName'],
@@ -80,6 +89,8 @@ class RegisterController extends Controller
             'contact'=> $data['contact'], //Carbon::parse($value)->format('m/d/Y');
             $dateOb=$data['dob'],
             'dob'=>Carbon::parse($dateOb)->format('Y/m/d'),
+            'status'=> $status,
+            'role_id'=>$status,
         ]);
     }
 }

@@ -163,6 +163,27 @@
                         </div>
 
 
+                        <div class="form-group row dropdown">
+                            <label for="Status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+
+                            <div class="col-md-6">
+                                {{-- <input id="name" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
+
+ --}}
+                                <select name="status" type="text" id="name" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') }}" required autocomplete="status" autofocus>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Employee">Employee</option>
+                                    <option value="HOD">HOD</option>
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

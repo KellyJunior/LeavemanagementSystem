@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Routes for admin page setting.
+Route::get('admin', function() {
+    return view('admin.footer');
+})->name('admin');
+Route::get('adminAnalytics', function(){
+    return view('admin.graphAnalytics');
+})->name('adminAnalytics');
